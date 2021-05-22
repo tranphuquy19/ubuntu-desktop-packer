@@ -46,4 +46,4 @@ ritwickdey.LiveServer
 streetsidesoftware.code-spell-checker
 TabNine.tabnine-vscode
 EOF
-) xargs -L 1 --install-extension
+) | xargs -L 1 --install-extension
