@@ -38,6 +38,10 @@ The boxcutter templates currently support the following desktop virtualization s
 * `virtualbox-iso` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) desktop virtualization
 * `vmware-iso` - [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation) desktop virtualization
 
+## Add Vagrant box
+
+    $ vagrant box add ./box/virtualbox/ubuntu2004-desktop-0.1.0.box --name ubuntu2004-desktop --provider virtualbox --force
+
 ## Building the Vagrant boxes with the box script
 
 We've also provided a wrapper script `bin/box` for ease of use, so alternatively, you can use
