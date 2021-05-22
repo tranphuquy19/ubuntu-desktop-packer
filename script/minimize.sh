@@ -31,6 +31,12 @@ echo "==> Removing X11 libraries"
 apt-get -y purge libx11-data xauth libxmuu1 libxcb1 libx11-6 libxext6
 echo "==> Removing obsolete networking components"
 apt-get -y purge ppp pppconfig pppoeconf
+echo "==> Removing LibreOffice"
+apt-get -y purge libreoffice-core libreoffice-calc libreoffice-common libreoffice-draw libreoffice-gtk libreoffice-gnome libreoffice-impress libreoffice-math libreoffice-gtk libreoffice-ogltrans libreoffice-pdfimport libreoffice-writer libreoffice-style-tango
+echo "==> Remove firefox"
+apt-get -y purge firefox
+echo "==> Remove gnome games and utilities"
+apt-get -y purge aisleriot gnome-mines gnome-mahjongg gnome-sudoku rhythmbox-data transmission-common simple-scan cheese deja-dup gnome-todo-common shotwell-common usb-creator-common gnome-calendar remmina-common
 echo "==> Removing other oddities"
 apt-get -y purge popularity-contest installation-report landscape-common wireless-tools wpasupplicant ubuntu-serverguide
 
