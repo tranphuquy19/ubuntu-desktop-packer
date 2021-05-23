@@ -75,7 +75,10 @@ else
         37 "IDEA Ultimate" off
         38 "IDEA GoLand" off
         39 "Stacer" off
-        40 "Install popular Chrome extensions" off)
+        40 "Install popular Chrome extensions" off
+        41 "Terraform-Packer-Vagrant" off
+        42 "VNC Viewer" off
+        43 "Zoom" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
@@ -287,7 +290,7 @@ else
             ;;
 
         29)
-            echo "Installing common VSCode extesions"
+            echo "Installing common VSCode extensions"
             cat >/tmp/vscode-extensions.list <<EOF
 codezombiech.gitignore
 donjayamanne.githistory
@@ -383,9 +386,32 @@ EOF
             install_chrome_extension "nhdogjmejiglipccpnnnanhbledajbpd" "Vue.js devtools"
             ;;
 
+        41)
+            echo "Installing Hachicorp Tools: Terraform, Packer, Vagrant"
+
+            curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+            sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+            apt install terraform packer vagrant -y
+            ;;
+
+        42)
+            echo "Installing VNC Viewer"
+            wget https://www.realvnc.com/download/file/viewer.files/VNC-Viewer-6.21.406-Linux-x64.deb
+            apt install ./VNC-Viewer-6.21.406-Linux-x64.deb
+            rm -rf VNC-Viewer-6.21.406-Linux-x64.deb
+            ;;
+
+         43)
+            echo "Installing Zoom"
+            wget https://cdn.zoom.us/prod/5.6.16888.0424/zoom_amd64.deb
+            apt install ./zoom_amd64.deb
+            rm -rf zoom_amd64.deb
+            ;;
+
         esac
     done
 fi
+
 BS
 
 chmod 777 /home/vagrant/Desktop/bootstrap.sh
