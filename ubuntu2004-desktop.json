@@ -1,6 +1,7 @@
 {
   "_comment": "Build with `packer build -var-file=ubuntu2004-desktop.json ubuntu.json`",
   "vm_name": "ubuntu-20.04-desktop",
+  "version": "1.0.0",
   "desktop": "true",
   "cpus": "4",
   "update": "true",
