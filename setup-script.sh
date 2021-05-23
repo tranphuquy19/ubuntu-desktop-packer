@@ -1,28 +1,4 @@
 #!/bin/bash
-
-INSTALL_PKGS="git net-tools code"
-
-# # Config VSCode
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt-get update
-
-for pkg in $INSTALL_PKGS; do
-    if command -v $pkg &>/dev/null; then
-        echo "$pkg already installed"
-    else
-        sudo apt-get install "$pkg" -y && echo "Successfully installed $pkg"
-    fi
-done
-
-# Install Chrome
-cd /tmp
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-
-cat > /home/vagrant/Desktop/bootstrap.sh <<\BS
-#!/bin/bash
 set -e
 
 if [[ $EUID -ne 0 ]]; then
@@ -304,7 +280,6 @@ EOF
         30)
             echo "Installing Docker 20.10"
             curl https://releases.rancher.com/install-docker/20.10.sh | sh
-            sudo chmod 777 /var/run/docker.sock
             sudo usermod -aG docker vagrant
             ;;
 
@@ -316,6 +291,3 @@ EOF
         esac
     done
 fi
-BS
-
-chmod 777 /home/vagrant/Desktop/bootstrap.sh
