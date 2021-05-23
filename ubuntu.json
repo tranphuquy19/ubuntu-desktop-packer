@@ -60,15 +60,21 @@
       "ssh_handshake_attempts": "200",
       "type": "virtualbox-iso",
       "vboxmanage": [
-        [
-          "modifyvm", "{{.Name}}", "--nictype1", "virtio"
-        ],
-        [
-          "modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}"
-        ],
-        [
-          "modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"
-        ]
+        ["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
+        ["modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}"],
+        ["modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"],
+        ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
+        ["modifyvm", "{{.Name}}", "--vram", "128"],
+        ["modifyvm", "{{.Name}}", "--audio", "pulse"],
+        ["modifyvm", "{{.Name}}", "--audiocontroller", "ac97"],
+        ["modifyvm", "{{.Name}}", "--audioout", "on"],
+        ["modifyvm", "{{.Name}}", "--ioapic", "on"],
+        ["modifyvm", "{{.Name}}", "--rtcuseutc", "on"],
+        ["modifyvm", "{{.Name}}", "--accelerate3d", "off"],
+        ["modifyvm", "{{.Name}}", "--nested-hw-virt", "on"],
+        ["modifyvm", "{{.Name}}", "--clipboard", "bidirectional"],
+        ["setextradata", "global", "GUI/MaxGuestResolution", "any"],
+        ["setextradata", "{{.Name}}", "CustomVideoMode1", "1024x768x32"]
       ],
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}"
