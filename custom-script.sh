@@ -64,7 +64,7 @@ else
         26 "Webpack" off
         27 "Grunt" off
         28 "Gulp" off
-        29 "Install common VSCode extesions" off
+        29 "Install popular VSCode extesions" off
         30 "Docker 20.10" off
         31 "Set resolution 1360x768" off
         32 "Postman" off
@@ -74,12 +74,13 @@ else
         36 "Telegram Desktop" off
         37 "IDEA Ultimate" off
         38 "IDEA GoLand" off
-        39 "Stacer" off)
+        39 "Stacer" off
+        40 "Install popular Chrome extensions" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
         case $choice in
-      	
+
         1)
             #Install Sublime Text 3*
             echo "Installing Sublime Text"
@@ -287,7 +288,7 @@ else
 
         29)
             echo "Installing common VSCode extesions"
-            cat > /tmp/vscode-extensions.list <<EOF
+            cat >/tmp/vscode-extensions.list <<EOF
 codezombiech.gitignore
 donjayamanne.githistory
 eamodio.gitlens
@@ -314,50 +315,74 @@ EOF
             echo "Set resolution 1360x768"
             su -c 'xrandr -d :0 --output Virtual1 --mode 1360x768 && gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32' vagrant
             ;;
-            
+
         32)
             echo "Installing Postman"
             snap install postman --classic
             ;;
-            
+
         33)
             echo "Installing Webstorm"
             snap install webstorm --classic
             ;;
-            
+
         34)
             echo "Installing Forinet VPN Client"
             wget https://filestore.fortinet.com/forticlient/downloads/forticlient_vpn_7.0.0.0018_amd64.deb
             apt install ./forticlient_vpn_7.0.0.0018_amd64.deb -y
             rm -rf forticlient_vpn_7.0.0.0018_amd64.deb
             ;;
-            
+
         35)
             echo "Installing Microsoft Teams - Insiders"
             snap install teams-insiders
             ;;
-            
+
         36)
             echo "Installing Telegram Desktop"
             snap install telegram-desktop
             ;;
-            
-        
-        37)
+
+        \
+            37)
             echo "Installing IDEA Ultimate"
             snap install intellij-idea-ultimate --classic
             ;;
-            
+
         38)
             echo "Installing GoLand"
             snap install goland --classic
             ;;
-            
+
         39)
             echo "Installing Stacer"
             apt install stacer -y
             ;;
-                
+
+        40)
+            echo "Installing Chrome extensions"
+
+            install_chrome_extension() {
+                preferences_dir_path="/opt/google/chrome/extensions"
+                pref_file_path="$preferences_dir_path/$1.json"
+                upd_url="https://clients2.google.com/service/update2/crx"
+                mkdir -p "$preferences_dir_path"
+                echo "{" >"$pref_file_path"
+                echo "  \"external_update_url\": \"$upd_url\"" >>"$pref_file_path"
+                echo "}" >>"$pref_file_path"
+                echo Added \""$pref_file_path"\" ["$2"]
+            }
+
+            install_chrome_extension "cjpalhdlnbpafiamejdnhcphjbkeiagm" "uBlock Origin"
+            install_chrome_extension "dhdgffkkebhmkfjojejmpbldmpobfkfo" "Tampermonkey"
+            install_chrome_extension "bkhaagjahfmjljalopjnoealnfndnagc" "Octotree - GitHub code tree"
+            install_chrome_extension "bcjindcccaagfpapjjmafapmmgkkhgoa" "JSON Formatter"
+            install_chrome_extension "lpcaedmchfhocbbapmcbpinfpgnhiddi" "Google Keep Chrome Extension"
+            install_chrome_extension "aapbdbdomjkkjkaonfhkkikfgjllcleb" "Google Translate"
+            install_chrome_extension "fmkadmapgofadopljbjfkapdkoienihi" "React Developer Tools"
+            install_chrome_extension "nhdogjmejiglipccpnnnanhbledajbpd" "Vue.js devtools"
+            ;;
+
         esac
     done
 fi
