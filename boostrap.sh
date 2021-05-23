@@ -374,21 +374,21 @@ EOF
         42)
             echo "Installing VNC Viewer"
             wget https://www.realvnc.com/download/file/viewer.files/VNC-Viewer-6.21.406-Linux-x64.deb
-            apt install ./VNC-Viewer-6.21.406-Linux-x64.deb
+            apt install ./VNC-Viewer-6.21.406-Linux-x64.deb -y
             rm -rf VNC-Viewer-6.21.406-Linux-x64.deb
             ;;
 
          43)
             echo "Installing Zoom"
             wget https://cdn.zoom.us/prod/5.6.16888.0424/zoom_amd64.deb
-            apt install ./zoom_amd64.deb
+            apt install ./zoom_amd64.deb -y
             rm -rf zoom_amd64.deb
             ;;
 
         44)
             echo "Installing AnyDesk"
             wget https://download.anydesk.com/linux/anydesk_6.1.1-1_amd64.deb
-            apt install ./anydesk_6.1.1-1_amd64.deb
+            apt install ./anydesk_6.1.1-1_amd64.deb -y
             rm -rf anydesk_6.1.1-1_amd64.deb
             ;;
 
