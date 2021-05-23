@@ -54,7 +54,8 @@ else
         40 "Install popular Chrome extensions" off
         41 "Terraform-Packer-Vagrant" off
         42 "VNC Viewer" off
-        43 "Zoom" off)
+        43 "Zoom" off
+        44 "AnyDesk" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
@@ -363,7 +364,7 @@ EOF
             ;;
 
         41)
-            echo "Installing Hachicorp Tools: Terraform, Packer, Vagrant"
+            echo "Installing HashiCorp Tools: Terraform, Packer, Vagrant"
 
             curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
             sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
@@ -382,6 +383,13 @@ EOF
             wget https://cdn.zoom.us/prod/5.6.16888.0424/zoom_amd64.deb
             apt install ./zoom_amd64.deb
             rm -rf zoom_amd64.deb
+            ;;
+
+        44)
+            echo "Installing AnyDesk"
+            wget https://download.anydesk.com/linux/anydesk_6.1.1-1_amd64.deb
+            apt install ./anydesk_6.1.1-1_amd64.deb
+            rm -rf anydesk_6.1.1-1_amd64.deb
             ;;
 
         esac
