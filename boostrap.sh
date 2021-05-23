@@ -40,12 +40,12 @@ else
         26 "Webpack" off
         27 "Grunt" off
         28 "Gulp" off
-        29 "Install popular VSCode extesions" off
+        29 "Install popular VSCode extensions" off
         30 "Docker 20.10" off
         31 "Set resolution 1360x768" off
         32 "Postman" off
-        33 "Webstorm" off
-        34 "Forinet VPN Client" off
+        33 "WebStorm" off
+        34 "Fortinet VPN Client" off
         35 "Microsoft Teams - Insiders" off
         36 "Telegram Desktop" off
         37 "IDEA Ultimate" off
@@ -166,8 +166,8 @@ else
             ;;
 
         13)
-            #Teamviewer
-            echo "Installing Teamviewer"
+            #TeamViewer
+            echo "Installing TeamViewer"
             wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
             apt install ./teamviewer_amd64.deb -y
             rm -rf teamviewer_amd64.deb
@@ -301,12 +301,12 @@ EOF
             ;;
 
         33)
-            echo "Installing Webstorm"
+            echo "Installing WebStorm"
             snap install webstorm --classic
             ;;
 
         34)
-            echo "Installing Forinet VPN Client"
+            echo "Installing Fortinet VPN Client"
             wget https://filestore.fortinet.com/forticlient/downloads/forticlient_vpn_7.0.0.0018_amd64.deb
             apt install ./forticlient_vpn_7.0.0.0018_amd64.deb -y
             rm -rf forticlient_vpn_7.0.0.0018_amd64.deb
