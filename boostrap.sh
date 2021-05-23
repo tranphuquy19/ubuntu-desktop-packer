@@ -22,9 +22,9 @@ else
         8 "Bleachbit" off
         9 "Ubuntu Restricted Extras" off
         10 "VLC Media Player" off
-        11 "Unity Tewak Tool" off
+        11 "Unity Tweak Tool" off
         12 "Google Chrome" off
-        13 "Teamiewer" off
+        13 "Teamviewer" off
         14 "Skype" off
         15 "Paper GTK Theme" off
         16 "Arch Theme" off
@@ -41,19 +41,25 @@ else
         27 "Grunt" off
         28 "Gulp" off
         29 "Install common VSCode extesions" off
-        30 "Install Docker 20.10" off
-        31 "Set resolution 1360x768" off)
+        30 "Docker 20.10" off
+        31 "Set resolution 1360x768" off
+        32 "Postman" off
+        33 "Webstorm" off
+        34 "Forinet VPN Client" off
+        35 "Microsoft Teams - Insiders" off
+        36 "Telegram Desktop" off
+        37 "IDEA Ultimate" off
+        38 "IDEA GoLand" off
+        39 "Stacer" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
         case $choice in
-        
+      	
         1)
             #Install Sublime Text 3*
             echo "Installing Sublime Text"
-            add-apt-repository ppa:webupd8team/sublime-text-3 -y
-            apt update
-            apt install sublime-text-installer -y
+            snap install sublime-text --classic
             ;;
 
         2)
@@ -150,30 +156,26 @@ else
 
             #Chrome
             echo "Installing Google Chrome"
-            wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-            sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-            apt-get update
-            apt-get install google-chrome-stable -y
+            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+            apt install ./google-chrome-stable_current_amd64.deb -y
+            rm -rf google-chrome-stable_current_amd64.deb
             ;;
 
         13)
             #Teamviewer
             echo "Installing Teamviewer"
-            wget http://download.teamviewer.com/download/teamviewer_i386.deb
-            dpkg -i teamviewer_i386.deb
-            apt-get install -f -y
-            rm -rf teamviewer_i386.deb
+            wget https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+            apt install ./teamviewer_amd64.deb -y
+            rm -rf teamviewer_amd64.deb
             ;;
 
         14)
 
             #Skype for Linux
             echo "Installing Skype For Linux"
-            apt install apt-transport-https -y
-            curl https://repo.skype.com/data/SKYPE-GPG-KEY | apt-key add -
-            echo "deb https://repo.skype.com/deb stable main" | tee /etc/apt/sources.list.d/skypeforlinux.list
-            apt update
-            apt install skypeforlinux -y
+            wget https://go.skype.com/skypeforlinux-64.deb
+            apt install ./skypeforlinux-64.deb -y
+            rm -rf skypeforlinux-64.deb
             ;;
 
         15)
@@ -281,13 +283,57 @@ EOF
             echo "Installing Docker 20.10"
             curl https://releases.rancher.com/install-docker/20.10.sh | sh
             sudo usermod -aG docker vagrant
+            chmod 777 /var/run/docker.sock
             ;;
 
         31)
             echo "Set resolution 1360x768"
-            su -c 'xrandr -d :0 --output Virtual1 --mode 1360x768' vagrant
+            su -c 'xrandr -d :0 --output Virtual1 --mode 1360x768 && gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 32' vagrant
             ;;
-
+            
+        32)
+            echo "Installing Postman"
+            snap install postman --classic
+            ;;
+            
+        33)
+            echo "Installing Webstorm"
+            snap install webstorm --classic
+            ;;
+            
+        34)
+            echo "Installing Forinet VPN Client"
+            wget https://filestore.fortinet.com/forticlient/downloads/forticlient_vpn_7.0.0.0018_amd64.deb
+            apt install ./forticlient_vpn_7.0.0.0018_amd64.deb -y
+            rm -rf forticlient_vpn_7.0.0.0018_amd64.deb
+            ;;
+            
+        35)
+            echo "Installing Microsoft Teams - Insiders"
+            snap install teams-insiders
+            ;;
+            
+        36)
+            echo "Installing Telegram Desktop"
+            snap install telegram-desktop
+            ;;
+            
+        
+        37)
+            echo "Installing IDEA Ultimate"
+            snap install intellij-idea-ultimate --classic
+            ;;
+            
+        38)
+            echo "Installing GoLand"
+            snap install goland --classic
+            ;;
+            
+        39)
+            echo "Installing Stacer"
+            apt install stacer -y
+            ;;
+                
         esac
     done
 fi
