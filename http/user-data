@@ -7,7 +7,6 @@ autoinstall:
     username: vagrant
   network:
     version: 2
-    renderer: NetworkManager
     ethernets:
       enp0s3:
         dhcp4: true
