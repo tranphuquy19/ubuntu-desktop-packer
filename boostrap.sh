@@ -402,9 +402,14 @@ EOF
 
         46)
             echo "Installing php & composer nginx"
-            apt install -y php-mbstring php-xml php-fpm php-zip php-common php-fpm php-cli php-curl unzip curl nginx
+            apt install -y php-mbstring php-xml php-fpm php-zip php-common php-fpm php-cli php-curl php-mysql php-pgsql unzip curl nginx
             curl -s https://getcomposer.org/installer | php
             mv composer.phar /usr/local/bin/composer
+            chown -R vagrant:vagrant /var/www
+            echo "extension=pdo_mysql" >> /etc/php/7.4/cli/php.ini
+            echo "extension=php_pdo_pgsql.dll" >> /etc/php/7.4/cli/php.ini
+            echo "extension=php_pgsql.dll" >> /etc/php/7.4/cli/php.ini
+
             ;;
         esac
 
