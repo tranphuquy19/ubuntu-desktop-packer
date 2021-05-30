@@ -55,7 +55,8 @@ else
         41 "Terraform-Packer-Vagrant" off
         42 "VNC Viewer" off
         43 "Zoom" off
-        44 "AnyDesk" off)
+        44 "AnyDesk" off
+        45 "Docker-compose" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
@@ -390,6 +391,12 @@ EOF
             wget https://download.anydesk.com/linux/anydesk_6.1.1-1_amd64.deb
             apt install ./anydesk_6.1.1-1_amd64.deb -y
             rm -rf anydesk_6.1.1-1_amd64.deb
+            ;;
+
+         45)
+            echo "Installing Docker-compose"
+            curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
             ;;
 
         esac
