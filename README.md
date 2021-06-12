@@ -30,7 +30,7 @@ For example, to build Ubuntu 20.04, use the following:
 If you want to make boxes for a specific desktop virtualization platform, use the `-only`
 parameter.  For example, to build Ubuntu 20.04 for VirtualBox:
 
-    $ packer build -only=virtualbox-iso -var-file=ubuntu2004.json ubuntu.json
+    $ packer build -only=virtualbox-iso -var-file=ubuntu2004-desktop.json ubuntu.json
 
 The boxcutter templates currently support the following desktop virtualization strings:
 

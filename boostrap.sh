@@ -325,11 +325,10 @@ EOF
             snap install telegram-desktop
             ;;
 
-        \
-            37)
-            echo "Installing IDEA Ultimate"
-            snap install intellij-idea-ultimate --classic
-            ;;
+        37)
+        echo "Installing IDEA Ultimate"
+        snap install intellij-idea-ultimate --classic
+        ;;
 
         38)
             echo "Installing GoLand"

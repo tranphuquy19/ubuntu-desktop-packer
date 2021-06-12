@@ -80,7 +80,9 @@ else
         41 "Terraform-Packer-Vagrant" off
         42 "VNC Viewer" off
         43 "Zoom" off
-        44 "AnyDesk" off)
+        44 "AnyDesk" off
+        45 "Docker-compose" off
+        46 "php, composer, nginx" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
@@ -348,11 +350,11 @@ EOF
             snap install telegram-desktop
             ;;
 
-        \
-            37)
-            echo "Installing IDEA Ultimate"
-            snap install intellij-idea-ultimate --classic
-            ;;
+        
+        37)
+        echo "Installing IDEA Ultimate"
+        snap install intellij-idea-ultimate --classic
+        ;;
 
         38)
             echo "Installing GoLand"
@@ -403,7 +405,7 @@ EOF
             rm -rf VNC-Viewer-6.21.406-Linux-x64.deb
             ;;
 
-         43)
+        43)
             echo "Installing Zoom"
             wget https://cdn.zoom.us/prod/5.6.16888.0424/zoom_amd64.deb
             apt install ./zoom_amd64.deb -y
@@ -417,8 +419,27 @@ EOF
             rm -rf anydesk_6.1.1-1_amd64.deb
             ;;
 
+        45)
+            echo "Installing Docker-compose"
+            curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
+            ;;
+
+        46)
+            echo "Installing php & composer nginx"
+            apt install -y php-mbstring php-xml php-fpm php-zip php-common php-fpm php-cli php-curl php-mysql php-pgsql unzip curl nginx
+            curl -s https://getcomposer.org/installer | php
+            mv composer.phar /usr/local/bin/composer
+            chown -R vagrant:vagrant /var/www
+            echo "extension=pdo_mysql" >> /etc/php/7.4/cli/php.ini
+            echo "extension=php_pdo_pgsql.dll" >> /etc/php/7.4/cli/php.ini
+            echo "extension=php_pgsql.dll" >> /etc/php/7.4/cli/php.ini
+
+            ;;
         esac
+
     done
+
 fi
 
 BS
