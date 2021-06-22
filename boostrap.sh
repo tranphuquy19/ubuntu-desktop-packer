@@ -362,6 +362,8 @@ EOF
             install_chrome_extension "aapbdbdomjkkjkaonfhkkikfgjllcleb" "Google Translate"
             install_chrome_extension "fmkadmapgofadopljbjfkapdkoienihi" "React Developer Tools"
             install_chrome_extension "nhdogjmejiglipccpnnnanhbledajbpd" "Vue.js devtools"
+            install_chrome_extension "amfojhdiedpdnlijjbhjnhokbnohfdfb" "eJOY English - Learn with Movies"
+            install_chrome_extension "apmicgkbejflkgeljipcebaoeigmangd" "Keep Awake (Display | System)"
             ;;
 
         41)
