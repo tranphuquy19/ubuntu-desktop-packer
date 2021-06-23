@@ -57,7 +57,8 @@ else
         43 "Zoom" off
         44 "AnyDesk" off
         45 "Docker-compose" off
-        46 "php, composer, nginx" off)
+        46 "php, composer, nginx" off
+        47 "IDEA Community" off,)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
@@ -411,6 +412,11 @@ EOF
             echo "extension=php_pdo_pgsql.dll" >> /etc/php/7.4/cli/php.ini
             echo "extension=php_pgsql.dll" >> /etc/php/7.4/cli/php.ini
 
+            ;;
+
+        47)
+            echo "IDEA Community"
+            snap install intellij-idea-community --classic
             ;;
         esac
 
