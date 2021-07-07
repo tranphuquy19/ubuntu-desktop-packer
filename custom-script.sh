@@ -83,7 +83,9 @@ else
         44 "AnyDesk" off
         45 "Docker-compose" off
         46 "php, composer, nginx" off
-        47 "IDEA Community" off,)
+        47 "IDEA Community" off,
+        48 "Discord" off,)
+        49 "OBS Studio" off,)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
@@ -440,8 +442,18 @@ EOF
             ;;
 
         47)
-            echo "IDEA Community"
+            echo "Installing IDEA Community"
             snap install intellij-idea-community --classic
+            ;;
+        
+        48)
+            echo "Installing Discord"
+            snap install discord
+            ;;
+
+        49)
+            echo "Installing OBS Studio"
+            snap install obs-studio
             ;;
         esac
 
