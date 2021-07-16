@@ -310,6 +310,9 @@ ms-vscode-remote.remote-wsl
 ritwickdey.LiveServer
 streetsidesoftware.code-spell-checker
 TabNine.tabnine-vscode
+coenraads.bracket-pair-colorizer-2
+jspolancor.presentationmode
+jakob101.relativepath
 EOF
             su -c 'cat /tmp/vscode-extensions.list | xargs -L1 code --install-extension' vagrant
             ;;
