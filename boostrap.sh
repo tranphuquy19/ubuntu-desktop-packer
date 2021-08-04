@@ -441,6 +441,11 @@ EOF
             wget --no-check-certificate https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz -O go$GOLANG_VERSION.linux-amd64.tar.gz
             tar zxf go$GOLANG_VERSION.linux-amd64.tar.gz
             rm -rf go$GOLANG_VERSION.linux-amd64.tar.gz
+            mkdir -p /home/vagrant/go/{bin,pkg,src}
+            mv go /usr/local
+            echo 'export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin' >> /home/vagrant/.bashrc
             ;;
         esac
 
