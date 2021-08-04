@@ -60,7 +60,8 @@ else
         46 "php, composer, nginx" off
         47 "IDEA Community" off,
         48 "Discord" off,)
-        49 "OBS Studio" off,)
+        49 "OBS Studio" off,
+        50 "Golang 1.16.6" off,)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
@@ -432,6 +433,14 @@ EOF
         49)
             echo "Installing OBS Studio"
             snap install obs-studio
+            ;;
+
+        50)
+            echo "Installing Golang 1.16.6"
+            GOLANG_VERSION=1.16.6
+            wget --no-check-certificate https://golang.org/dl/go$GOLANG_VERSION.linux-amd64.tar.gz -O go$GOLANG_VERSION.linux-amd64.tar.gz
+            tar zxf go$GOLANG_VERSION.linux-amd64.tar.gz
+            rm -rf go$GOLANG_VERSION.linux-amd64.tar.gz
             ;;
         esac
 
