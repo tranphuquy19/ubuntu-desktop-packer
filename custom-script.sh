@@ -471,6 +471,7 @@ EOF
             echo 'export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin' >> /home/vagrant/.bashrc
+            source /home/vagrant/.bashrc
             ;;
         esac
 
