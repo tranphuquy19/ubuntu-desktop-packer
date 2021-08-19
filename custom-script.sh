@@ -19,7 +19,8 @@ done
 # Install Chrome
 cd /tmp
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb -y
+rm -rf google-chrome-stable_current_amd64.deb
 
 # Bootstrap script
 cat > /home/vagrant/Desktop/bootstrap.sh <<\BS
@@ -84,7 +85,7 @@ else
         45 "Docker-compose" off
         46 "php, composer, nginx" off
         47 "IDEA Community" off,
-        48 "Discord" off,)
+        48 "Discord" off,
         49 "OBS Studio" off,
         50 "Golang 1.16.6" off,)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
