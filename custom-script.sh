@@ -41,7 +41,7 @@ else
         1 "Sublime Text 3" off
         2 "LAMP Stack" off
         3 "Build Essentials" off
-        4 "Node.js 12" off
+        4 "Node.js 12 LTS & Yarn" off
         5 "Git" off
         6 "Composer" off
         7 "JDK 8" off
@@ -87,7 +87,9 @@ else
         47 "IDEA Community" off,
         48 "Discord" off,
         49 "OBS Studio" off,
-        50 "Golang 1.16.6" off,)
+        50 "Golang 1.16.6" off,
+        51 "Node.js 14 LTS & Yarn" off,
+        52 "Node.js 16 LTS & Yarn" off,)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
@@ -130,9 +132,10 @@ else
 
         4)
             #Install Nodejs
-            echo "Installing Nodejs 12"
+            echo "Installing Nodejs 12 & Yarn"
             curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
             apt install -y nodejs
+            npm install -g yarn
             ;;
 
         5)
@@ -473,6 +476,22 @@ EOF
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin' >> /home/vagrant/.bashrc
             source /home/vagrant/.bashrc
+            ;;
+
+        51)
+            #Install Nodejs
+            echo "Installing Nodejs 14 LTS & Yarn"
+            curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+            apt install -y nodejs
+            npm install -g yarn
+            ;;
+        
+        52)
+            #Install Nodejs
+            echo "Installing Nodejs 16 LTS & Yarn"
+            curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+            apt install -y nodejs
+            npm install -g yarn
             ;;
         esac
 
