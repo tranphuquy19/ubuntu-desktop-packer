@@ -1,14 +1,14 @@
 {
-  "_comment": "Build with `packer build -var-file=ubuntu2004-desktop.json ubuntu.json`",
+  "_comment": "Build with `packer build -only=virtualbox-iso -var-file=ubuntu2004-desktop.json ubuntu.json`",
   "vm_name": "ubuntu-20.04-desktop",
-  "version": "1.3.1",
+  "version": "1.3.3",
   "desktop": "true",
   "cpus": "1",
   "update": "true",
   "disk_size": "1007400",
-  "iso_checksum": "sha256:28ccdb56450e643bad03bb7bcf7507ce3d8d90e8bf09e38f6bd9ac298a98eaad",
-  "iso_name": "ubuntu-20.04.4-live-server-amd64.iso",
-  "iso_url": "https://releases.ubuntu.com/20.04.4/ubuntu-20.04.4-live-server-amd64.iso",
-  "memory": "4096",
+  "iso_checksum": "sha256:5035be37a7e9abbdc09f0d257f3e33416c1a0fb322ba860d42d74aa75c3468d4",
+  "iso_name": "ubuntu-20.04.5-live-server-amd64.iso",
+  "iso_url": "packer_cache/ubuntu-20.04.5-live-server-amd64.iso",
+  "memory": "8192",
   "vagrantfile_template": "tpl/vagrantfile-ubuntu2004-desktop.tpl"
 }
