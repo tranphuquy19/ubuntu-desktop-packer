@@ -63,7 +63,8 @@ else
         49 "OBS Studio" off,
         50 "Golang 1.16.6" off,
         51 "Node.js 14 LTS & Yarn" off,
-        52 "Node.js 16 LTS & Yarn" off,)
+        52 "Node.js 16 LTS & Yarn" off,
+        52 "Docker K3D Helm" off,)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices; do
@@ -285,13 +286,22 @@ formulahendry.auto-close-tag
 formulahendry.auto-rename-tag
 k--kato.intellij-idea-keybindings
 ms-azuretools.vscode-docker
-ms-vscode-remote.remote-wsl
 ritwickdey.LiveServer
 streetsidesoftware.code-spell-checker
 coenraads.bracket-pair-colorizer-2
 jspolancor.presentationmode
 jakob101.relativepath
 GitHub.copilot
+alefragnani.Bookmarks
+formulahendry.docker-extension-pack
+mkxml.vscode-filesize
+GitLab.gitlab-workflow
+hashicorp.hcl
+ms-kubernetes-tools.vscode-kubernetes-tools
+yzhang.markdown-all-in-one
+esbenp.prettier-vscode
+ms-vscode-remote.remote-ssh
+ms-vscode.remote-explorer
 EOF
             su -c 'cat /tmp/vscode-extensions.list | xargs -L1 code --install-extension' vagrant
             ;;
@@ -336,9 +346,9 @@ EOF
             ;;
 
         37)
-        echo "Installing IDEA Ultimate"
-        snap install intellij-idea-ultimate --classic
-        ;;
+            echo "Installing IDEA Ultimate"
+            snap install intellij-idea-ultimate --classic
+            ;;
 
         38)
             echo "Installing GoLand"
@@ -417,9 +427,9 @@ EOF
             curl -s https://getcomposer.org/installer | php
             mv composer.phar /usr/local/bin/composer
             chown -R vagrant:vagrant /var/www
-            echo "extension=pdo_mysql" >> /etc/php/7.4/cli/php.ini
-            echo "extension=php_pdo_pgsql.dll" >> /etc/php/7.4/cli/php.ini
-            echo "extension=php_pgsql.dll" >> /etc/php/7.4/cli/php.ini
+            echo "extension=pdo_mysql" >>/etc/php/7.4/cli/php.ini
+            echo "extension=php_pdo_pgsql.dll" >>/etc/php/7.4/cli/php.ini
+            echo "extension=php_pgsql.dll" >>/etc/php/7.4/cli/php.ini
 
             ;;
 
@@ -427,7 +437,7 @@ EOF
             echo "Installing IDEA Community"
             snap install intellij-idea-community --classic
             ;;
-        
+
         48)
             echo "Installing Discord"
             snap install discord
@@ -448,7 +458,7 @@ EOF
             mv go /usr/local
             echo 'export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin' >> /home/vagrant/.bashrc
+export PATH=$PATH:$GOPATH/bin' >>/home/vagrant/.bashrc
             source /home/vagrant/.bashrc
             ;;
 
@@ -459,7 +469,7 @@ export PATH=$PATH:$GOPATH/bin' >> /home/vagrant/.bashrc
             apt install -y nodejs
             npm install -g yarn
             ;;
-        
+
         52)
             #Install Nodejs
             echo "Installing Nodejs 16 LTS & Yarn"
@@ -467,6 +477,34 @@ export PATH=$PATH:$GOPATH/bin' >> /home/vagrant/.bashrc
             apt install -y nodejs
             npm install -g yarn
             ;;
+
+        53)
+            #Install K3D and Helm
+            echo "Installing Docker, K3D and Helm"
+            swapoff -a
+            apt install apt-transport-https curl wget -y
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+            echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
+            curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+            apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+            DEBIAN_FRONTEND=noninteractive apt install docker-ce docker-ce-cli containerd.io kubectl joe pbzip2 git openconnect -y
+            addgroup -a vagrant docker
+            systemctl enable docker
+            systemctl enable containerd
+            systemctl start docker
+            systemctl start containerd
+            curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+            wget -q -O - https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
+            # let's pull the k3s container image once in the base image and reuse it - saves traffic and start up time every time a child image is started
+            k3d cluster create warmup-cluster --servers 1 --agents 0
+            k3d cluster delete warmup-cluster
+            apt-get clean
+            cat /dev/null >~/.bash_history && history -c
+            dd if=/dev/zero of=/EMPTY bs=1M || echo "dd exit code $? is suppressed"
+            rm /EMPTY
+            sync
+            ;;
+
         esac
 
     done
