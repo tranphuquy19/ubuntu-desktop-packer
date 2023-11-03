@@ -1,14 +1,14 @@
 {
   "_comment": "Build with `packer build -var-file=ubuntu2204-desktop.json ubuntu2204.json`",
   "vm_name": "ubuntu-22.04-desktop",
-  "version": "22.04.2",
+  "version": "22.04.3",
   "desktop": "true",
   "cpus": "4",
   "update": "true",
   "disk_size": "1007400",
-  "iso_checksum": "sha256:5e38b55d57d94ff029719342357325ed3bda38fa80054f9330dc789cd2d43931",
+  "iso_checksum": "sha256:a4acfda10b18da50e2ec50ccaf860d7f20b389df8765611142305c0e911d16fd",
   "iso_name": "ubuntu-22.04.2-live-server-amd64.iso",
-  "iso_url": "https://releases.ubuntu.com/jammy/ubuntu-22.04.2-live-server-amd64.iso",
+  "iso_url": "https://releases.ubuntu.com/jammy/ubuntu-22.04.3-live-server-amd64.iso",
   "memory": "4096",
   "vagrantfile_template": "tpl/vagrantfile-ubuntu2204-desktop.tpl"
 }
