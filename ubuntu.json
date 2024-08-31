@@ -5,7 +5,7 @@
       "boot_wait": "5s",
       "boot_command": [
         "{{ user `boot_command_prefix` }}",
-        "autoinstall ds='nocloud-net;s=http://192.168.1.134:8181/'  ---",
+        "autoinstall ds='nocloud-net;s=https://download.innova-tech.io.vn/cloud-init/'  ---",
         "<wait><enter>",
         "{{ user `boot_command_suffix` }}"
       ],
