@@ -1,0 +1,16 @@
+{
+  "_comment": "Build with `packer build -var-file=ubuntu2204-desktop.json ubuntu2404.json`",
+  "vm_name": "ubuntu-24.04-desktop",
+  "version": "24.04.1",
+  "desktop": "true",
+  "cpus": "4",
+  "update": "true",
+  "disk_size": "130048",
+  "iso_checksum": "sha256:e240e4b801f7bb68c20d1356b60968ad0c33a41d00d828e74ceb3364a0317be9",
+  "iso_name": "ubuntu-24.04.1-live-server-amd64.iso",
+  "iso_url": "https://releases.ubuntu.com/noble/ubuntu-24.04.1-live-server-amd64.iso",
+  "memory": "4096",
+  "vagrantfile_template": "tpl/vagrantfile-ubuntu2404-desktop.tpl",
+  "boot_command_prefix": "c<wait>set gfxpayload=keep<enter><wait>linux /casper/vmlinuz quiet <wait>",
+  "boot_command_suffix": "initrd /casper/initrd<wait><enter>boot<enter><wait>"
+}

@@ -4,40 +4,8 @@
     {
       "boot_wait": "5s",
       "boot_command": [
-        "{{ user `boot_command_prefix` }}",
-        "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/",
-        "<wait><enter>"
-      ],
-      "disk_size": "{{ user `disk_size` }}",
-      "guest_os_type": "{{ user `vmware_guest_os_type` }}",
-      "headless": "{{ user `headless` }}",
-      "http_directory": "http",
-      "iso_checksum": "{{ user `iso_checksum` }}",
-      "iso_urls": [
-        "{{ user `iso_path` }}/{{ user `iso_name` }}",
-        "{{ user `iso_url` }}"
-      ],
-      "output_directory": "output-{{ user `vm_name` }}-vmware-iso",
-      "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
-      "ssh_password": "{{ user `ssh_password` }}",
-      "ssh_username": "{{ user `ssh_username` }}",
-      "ssh_timeout": "10000s",
-      "ssh_handshake_attempts": "20",
-      "tools_upload_flavor": "linux",
-      "type": "vmware-iso",
-      "vm_name": "{{ user `vm_name` }}",
-      "vmx_data": {
-        "ethernet0.pciSlotNumber": "32",
-        "memsize": "{{ user `memory` }}",
-        "numvcpus": "{{ user `cpus` }}"
-      },
-      "vmx_remove_ethernet_interfaces": true
-    },
-    {
-      "boot_wait": "5s",
-      "boot_command": [
         "c<wait>",
-        "linux /casper/vmlinuz --- autoinstall ds='nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/' ",
+        "linux /casper/vmlinuz --- autoinstall ds='nocloud-net;s=http://192.168.1.134:8181' ",
         "<enter><wait>",
         "initrd /casper/initrd<enter><wait>",
         "boot<enter>"
@@ -77,38 +45,8 @@
       ],
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}"
-    },
-    {
-      "boot_wait": "5s",
-      "boot_command": [
-        "{{ user `boot_command_prefix` }}",
-        "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/",
-        "<wait><enter>"
-      ],
-      "disk_size": "{{ user `disk_size` }}",
-      "floppy_files": ["http/{{ user `preseed` }}"],
-      "guest_os_type": "{{ user `parallels_guest_os_type` }}",
-      "http_directory": "http",
-      "iso_checksum": "{{ user `iso_checksum` }}",
-      "iso_urls": [
-        "{{ user `iso_path` }}/{{ user `iso_name` }}",
-        "{{ user `iso_url` }}"
-      ],
-      "output_directory": "output-{{ user `vm_name` }}-parallels-iso",
-      "parallels_tools_flavor": "lin",
-      "prlctl": [
-        ["set", "{{.Name}}", "--memsize", "{{ user `memory` }}"],
-        ["set", "{{.Name}}", "--cpus", "{{ user `cpus` }}"]
-      ],
-      "prlctl_version_file": ".prlctl_version",
-      "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
-      "ssh_password": "{{ user `ssh_password` }}",
-      "ssh_username": "{{ user `ssh_username` }}",
-      "ssh_wait_timeout": "10000s",
-      "ssh_handshake_attempts": "20",
-      "type": "parallels-iso",
-      "vm_name": "{{ user `vm_name` }}"
     }
+    
   ],
   "post-processors": [
     {
@@ -153,7 +91,7 @@
     }
   ],
   "variables": {
-    "boot_command_prefix": "<enter><enter><f6><esc><wait>",
+    "boot_command_prefix": "",
     "cleanup_pause": "",
     "cpus": "1",
     "custom_script": "custom-script.sh",

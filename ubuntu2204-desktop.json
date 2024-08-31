@@ -5,10 +5,12 @@
   "desktop": "true",
   "cpus": "4",
   "update": "true",
-  "disk_size": "262144",
+  "disk_size": "130048",
   "iso_checksum": "sha256:45f873de9f8cb637345d6e66a583762730bbea30277ef7b32c9c3bd6700a32b2",
   "iso_name": "ubuntu-22.04.4-live-server-amd64.iso",
   "iso_url": "https://releases.ubuntu.com/jammy/ubuntu-22.04.4-live-server-amd64.iso",
   "memory": "4096",
-  "vagrantfile_template": "tpl/vagrantfile-ubuntu2204-desktop.tpl"
+  "vagrantfile_template": "tpl/vagrantfile-ubuntu2204-desktop.tpl",
+  "boot_command_prefix": "c<wait>set gfxpayload=keep<enter><wait>linux /casper/vmlinuz quiet <wait>",
+  "boot_command_suffix": "initrd /casper/initrd<wait><enter>boot<enter><wait>"
 }

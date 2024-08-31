@@ -5,8 +5,9 @@
       "boot_wait": "5s",
       "boot_command": [
         "{{ user `boot_command_prefix` }}",
-        "autoinstall ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/",
-        "<wait><enter>"
+        "autoinstall ds='nocloud-net;s=http://192.168.1.134:8181/'  ---",
+        "<wait><enter>",
+        "{{ user `boot_command_suffix` }}"
       ],
       "disk_size": "{{ user `disk_size` }}",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
@@ -28,18 +29,84 @@
       "ssh_handshake_attempts": "200",
       "type": "virtualbox-iso",
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
-        ["modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}"],
-        ["modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"],
-        ["modifyvm", "{{.Name}}", "--graphicscontroller", "vmsvga"],
-        ["modifyvm", "{{.Name}}", "--vram", "128"],
-        ["modifyvm", "{{.Name}}", "--ioapic", "on"],
-        ["modifyvm", "{{.Name}}", "--rtcuseutc", "on"],
-        ["modifyvm", "{{.Name}}", "--accelerate3d", "off"],
-        ["modifyvm", "{{.Name}}", "--nested-hw-virt", "on"],
-        ["modifyvm", "{{.Name}}", "--clipboard", "bidirectional"],
-        ["setextradata", "global", "GUI/MaxGuestResolution", "any"],
-        ["setextradata", "{{.Name}}", "CustomVideoMode1", "1024x768x32"]
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--nictype1",
+          "virtio"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "{{ user `memory` }}"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "{{ user `cpus` }}"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--graphicscontroller",
+          "vboxvga"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--vram",
+          "128"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--ioapic",
+          "on"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--rtcuseutc",
+          "on"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--accelerate3d",
+          "off"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--nested-hw-virt",
+          "on"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--clipboard",
+          "bidirectional"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--mouse",
+          "usbtablet"
+        ],
+        [
+          "setextradata",
+          "global",
+          "GUI/MaxGuestResolution",
+          "any"
+        ],
+        [
+          "setextradata",
+          "{{.Name}}",
+          "CustomVideoMode1",
+          "1024x768x32"
+        ]
       ],
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "{{user `vm_name`}}"
@@ -88,21 +155,21 @@
     }
   ],
   "variables": {
-    "boot_command_prefix": "<enter><enter><f6><esc><wait>",
+    "boot_command_prefix": "c<wait>set gfxpayload=keep<enter><wait>linux /casper/vmlinuz quiet <wait>",
     "cleanup_pause": "",
-    "cpus": "1",
+    "cpus": "4",
     "custom_script": "custom-script.sh",
     "desktop": "false",
-    "disk_size": "1007400",
+    "disk_size": "130048",
     "ftp_proxy": "{{env `ftp_proxy`}}",
     "headless": "false",
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
     "install_vagrant_key": "true",
-    "iso_checksum": "sha256:5035be37a7e9abbdc09f0d257f3e33416c1a0fb322ba860d42d74aa75c3468d4",    
-    "iso_name": "ubuntu-20.04.5-live-server-amd64.iso",
-    "iso_path": "packer_cache/ubuntu-20.04.5-live-server-amd64.iso",
-    "iso_url": "https://releases.ubuntu.com/focal/ubuntu-20.04.5-live-server-amd64.iso",
+    "iso_checksum": "sha256:5035be37a7e9abbdc09f0d257f3e33416c1a0fb322ba860d42d74aa75c3468d4",
+    "iso_name": "ubuntu-22.04.4-live-server-amd64.iso",
+    "iso_path": "packer_cache/ubuntu-22.04.4-live-server-amd64.iso",
+    "iso_url": "https://releases.ubuntu.com/jammy/ubuntu-22.04.4-live-server-amd64.iso",
     "memory": "8192",
     "no_proxy": "{{env `no_proxy`}}",
     "parallels_guest_os_type": "ubuntu",
@@ -115,7 +182,7 @@
     "vagrantfile_template": "",
     "version": "0.1.0",
     "virtualbox_guest_os_type": "Ubuntu_64",
-    "vm_name": "ubuntu2004",
+    "vm_name": "ubuntu-22.04-desktop",
     "vmware_guest_os_type": "ubuntu-64"
   }
 }
